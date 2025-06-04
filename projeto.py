@@ -11,7 +11,7 @@ from email.mime.multipart import MIMEMultipart
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf-8')
 email = 'eduardonunesdasilva23@gmail.com'
 
-url = 'https://pokeapi.co/api/v2/pokemon/ditto'
+url = 'https://api.thecatapi.com/v1/breeds'
 
 def criaBanco(info01, info02, info03, info04):
     pass
@@ -47,4 +47,10 @@ def enviaEmail(email):
 
 resposta = requests.get(url)
 dados = resposta.json()
-print(dados)
+#print(dados)
+
+# Pegando o nome da Raça
+# for name in dados:
+#     raca = name['name']
+#     print(raca)
+
