@@ -9,7 +9,7 @@ from email.mime.multipart import MIMEMultipart
 
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf-8')
 email = 'eduardonunesdasilva23@gmail.com'
-#eduardonunesdasilva23@gmail.com
+
 
 def criaBanco(info01, info02, info03, info04):
     pass
@@ -40,5 +40,3 @@ def enviaEmail(email):
     except Exception as e:
         print(f"Erro, não foi possível enviar o e-mail: {e}")
 
-
-enviaEmail(email)
