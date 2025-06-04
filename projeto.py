@@ -2,6 +2,7 @@ import requests
 import sqlite3
 import sys
 import io
+import json
 
 import smtplib
 from email.mime.text import MIMEText
@@ -10,8 +11,12 @@ from email.mime.multipart import MIMEMultipart
 sys.stdout = io.TextIOWrapper(sys.stdout.buffer,encoding='utf-8')
 email = 'eduardonunesdasilva23@gmail.com'
 
+url = 'https://pokeapi.co/api/v2/pokemon/ditto'
 
 def criaBanco(info01, info02, info03, info04):
+    pass
+
+def extraiDados(url_base):
     pass
 
 def enviaEmail(email):
@@ -40,3 +45,6 @@ def enviaEmail(email):
     except Exception as e:
         print(f"Erro, não foi possível enviar o e-mail: {e}")
 
+resposta = requests.get(url)
+dados = resposta.json()
+print(dados)
