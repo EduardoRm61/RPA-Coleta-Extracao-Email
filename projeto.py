@@ -54,3 +54,7 @@ dados = resposta.json()
 #     raca = name['name']
 #     print(raca)
 
+# Pegando a origem dela
+# for origin in dados:
+#     name = origin['origin']
+#     print(name)
