@@ -58,3 +58,15 @@ dados = resposta.json()
 # for origin in dados:
 #     name = origin['origin']
 #     print(name)
+
+# Capturando código do país:
+for code in dados:
+    name = code['country_code']
+    print(name)
+
+# Capturando o temperamento
+# for temp in dados:
+#     name = temp['temperament']
+#     print(name)
+
+# Capturando
