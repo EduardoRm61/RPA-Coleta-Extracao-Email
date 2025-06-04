@@ -49,24 +49,27 @@ resposta = requests.get(url)
 dados = resposta.json()
 #print(dados)
 
-# Pegando o nome da Raça
+# 1 - Pegando o nome da Raça
 # for name in dados:
 #     raca = name['name']
 #     print(raca)
 
-# Pegando a origem dela
+# 2 - Pegando a origem dela
 # for origin in dados:
 #     name = origin['origin']
 #     print(name)
 
-# Capturando código do país:
-for code in dados:
-    name = code['country_code']
-    print(name)
+# 3 - Capturando código do país:
+# for code in dados:
+#     name = code['country_code']
+#     print(name)
 
-# Capturando o temperamento
+# 4 - Capturando o temperamento
 # for temp in dados:
 #     name = temp['temperament']
 #     print(name)
 
-# Capturando
+# 5 - Capturando o peso
+for peso in dados:
+    weight = peso['weight']['imperial']
+    print(weight)
