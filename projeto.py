@@ -70,6 +70,11 @@ dados = resposta.json()
 #     print(name)
 
 # 5 - Capturando o peso
-for peso in dados:
-    weight = peso['weight']['imperial']
-    print(weight)
+# for peso in dados:
+#     weight = peso['weight']['imperial']
+#     print(weight)
+
+# 6 - Capturando página na Wiki
+# for pag in dados:
+#     name = pag.get('wikipedia_url', "Sem Link")
+#     print(name)
