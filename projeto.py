@@ -40,6 +40,7 @@ def criaBanco(raca, origem, cod_pais, temp, peso, pag):
                 ))
     conexao.commit()
     conexao.close()
+    filters()
     
 def filters():
     conexao = sqlite3.connect('projeto_rpa.db')
@@ -48,7 +49,6 @@ def filters():
     cursor.execute('''
         CREATE TABLE IF NOT EXISTS Gatos_Resumo(
                    id INTEGER PRIMARY KEY AUTOINCREMENT,
-                   raca TEXT,
                    raca TEXT,
                    origem TEXT,
                    pagina_Wiki TEXT
@@ -65,8 +65,9 @@ def filters():
             INSERT INTO Gatos_Resumo (raca, origem, pagina_Wiki)
             VALUES (?, ?, ?)
         ''', linha)
-        conexao.commit()
-        conexao.close
+
+    conexao.commit()
+    conexao.close()
 
 def extraiDados(url_base):
     #url_base = requests.get(url_base)
