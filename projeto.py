@@ -73,36 +73,3 @@ def enviaEmail(email):
         print(f"Erro, não foi possível enviar o e-mail: {e}")
 
 
-
-
-#print(dados)
-
-# 1 - Pegando o nome da Raça
-# for name in dados:
-#     raca = name['name']
-#     print(raca)
-
-# 2 - Pegando a origem dela
-# for origin in dados:
-#     name = origin['origin']
-#     print(name)
-
-# 3 - Capturando código do país:
-# for code in dados:
-#     name = code['country_code']
-#     print(name)
-
-# 4 - Capturando o temperamento
-# for temp in dados:
-#     name = temp['temperament']
-#     print(name)
-
-# 5 - Capturando o peso
-# for peso in dados:
-#     weight = peso['weight']['imperial']
-#     print(weight)
-
-# 6 - Capturando página na Wiki
-# for pag in dados:
-#     name = pag.get('wikipedia_url', "Sem Link")
-#     print(name)
