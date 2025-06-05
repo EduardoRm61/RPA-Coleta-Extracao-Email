@@ -40,7 +40,7 @@ def criaBanco(raca, origem, cod_pais, temp, peso, pag):
                 ))
     conexao.commit()
     conexao.close()
-    filters()
+    
     
 def filters():
     conexao = sqlite3.connect('projeto_rpa.db')
@@ -54,6 +54,8 @@ def filters():
                    pagina_Wiki TEXT
                 )
             ''')
+    
+    cursor.execute('DELETE FROM Gatos_Resumo')
     
     cursor.execute('''
          SELECT raca, origem, pagina_wiki FROM Gatos
@@ -81,6 +83,23 @@ def extraiDados(url_base):
     if not dados:
         print({"Erro":"Não foi possível buscar as informações"})
 
+    
+        conexao = sqlite3.connect('projeto_rpa.db')
+    cursor = conexao.cursor()
+
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Gatos(
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            raca TEXT,
+            origem TEXT,
+            cod_pais TEXT,
+            temperamento TEXT,
+            peso TEXT,
+            pagina_Wiki TEXT
+        )
+    ''')
+
     api = dados[0]
     try:
         for api in dados:
@@ -91,6 +110,8 @@ def extraiDados(url_base):
             peso = api.get('weight', {}).get('imperial', 'N/A')
             pag = api.get('wikipedia_url', 'Sem Link') 
             criaBanco(raca, origem, cod_pais, temp, peso, pag)
+
+        
 
     except Exception as e:
         print({"Erro ao processar dados": str(e)})
@@ -124,3 +145,4 @@ def enviaEmail(email):
         print(f"Erro, não foi possível enviar o e-mail: {e}")
 
 
+extraiDados(url)
