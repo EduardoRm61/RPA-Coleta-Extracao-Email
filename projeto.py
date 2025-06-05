@@ -133,3 +133,16 @@ def enviaEmail(email):
 
 
 extraiDados(url)
+
+conexao = sqlite3.connect('projeto_rpa.db')
+cursor = conexao.cursor()
+
+print("\n Conteúdo da tabela Gatos:")
+cursor.execute('SELECT * FROM Gatos')
+for linha in cursor.fetchall():
+    print(linha)
+
+print("\nConteúdo da tabela Gatos_Resumo:")
+cursor.execute('SELECT * FROM Gatos_Resumo')
+for linha in cursor.fetchall():
+    print(linha)
