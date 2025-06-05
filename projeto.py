@@ -13,11 +13,38 @@ email = 'eduardonunesdasilva23@gmail.com'
 
 url = 'https://api.thecatapi.com/v1/breeds'
 
-def criaBanco(info01, info02, info03, info04):
+def criaBanco(raca, origem, cod_pais, temp, peso, pag):
     pass
 
 def extraiDados(url_base):
-    pass
+    #url_base = requests.get(url_base)
+    resposta = requests.get(url_base)
+
+    if resposta.status_code!=200:
+        print({"Erro:":"Não foi possível buscar os dados"})
+        return
+    
+    dados = resposta.json()
+    if not dados:
+        print({"Erro":"Não foi possível buscar as informações"})
+
+    api = dados[0]
+    try:
+        for api in dados:
+            raca = api.get('name', 'Desconhecido')
+            origem = api.get('origin', 'Desconhecido')
+            cod_pais = api.get('country_code', 'N/A')
+            temp = api.get('temperament', 'N/A')
+            peso = api.get('weight', {}).get('imperial', 'N/A')
+            pag = api.get('wikipedia_url', 'Sem Link') 
+            criaBanco(raca, origem, cod_pais, temp, peso, pag)
+
+    except Exception as e:
+        print({"Erro ao processar dados": str(e)})
+
+
+
+
 
 def enviaEmail(email):
     try:
@@ -45,8 +72,9 @@ def enviaEmail(email):
     except Exception as e:
         print(f"Erro, não foi possível enviar o e-mail: {e}")
 
-resposta = requests.get(url)
-dados = resposta.json()
+
+
+
 #print(dados)
 
 # 1 - Pegando o nome da Raça
