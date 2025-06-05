@@ -13,22 +13,7 @@ email = 'eduardonunesdasilva23@gmail.com'
 
 url = 'https://api.thecatapi.com/v1/breeds'
 
-def criaBanco(raca, origem, cod_pais, temp, peso, pag):
-    conexao = sqlite3.connect('projeto_rpa.db')
-    cursor = conexao.cursor()
-
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS Gatos(
-                   id INTEGER PRIMARY KEY AUTOINCREMENT,
-                   raca TEXT,
-                   origem TEXT,
-                   cod_pais TEXT,
-                   temperamento TEXT,
-                   peso TEXT,
-                   pagina_Wiki TEXT
-                )
-            ''')
-    
+def criaBanco(raca, origem, cod_pais, temp, peso, pag,cursor):
     cursor.execute('''
         INSERT INTO Gatos(
                    raca, origem, cod_pais, 
@@ -38,8 +23,7 @@ def criaBanco(raca, origem, cod_pais, temp, peso, pag):
                     raca, origem, cod_pais,
                     temp, peso, pag
                 ))
-    conexao.commit()
-    conexao.close()
+
     
     
 def filters():
@@ -55,7 +39,7 @@ def filters():
                 )
             ''')
     
-    cursor.execute('DELETE FROM Gatos_Resumo')
+    #cursor.execute('DELETE FROM Gatos_Resumo')
     
     cursor.execute('''
          SELECT raca, origem, pagina_wiki FROM Gatos
@@ -84,7 +68,7 @@ def extraiDados(url_base):
         print({"Erro":"Não foi possível buscar as informações"})
 
     
-        conexao = sqlite3.connect('projeto_rpa.db')
+    conexao = sqlite3.connect('projeto_rpa.db')
     cursor = conexao.cursor()
 
 
@@ -100,7 +84,6 @@ def extraiDados(url_base):
         )
     ''')
 
-    api = dados[0]
     try:
         for api in dados:
             raca = api.get('name', 'Desconhecido')
@@ -109,9 +92,13 @@ def extraiDados(url_base):
             temp = api.get('temperament', 'N/A')
             peso = api.get('weight', {}).get('imperial', 'N/A')
             pag = api.get('wikipedia_url', 'Sem Link') 
-            criaBanco(raca, origem, cod_pais, temp, peso, pag)
 
-        
+            criaBanco(raca, origem, cod_pais, temp, peso, pag, cursor)
+
+        conexao.commit()
+        conexao.close()
+
+        filters()
 
     except Exception as e:
         print({"Erro ao processar dados": str(e)})
