@@ -32,7 +32,7 @@ def criaBanco(raca, origem, cod_pais, temp, peso, pag):
     cursor.execute('''
         INSERT INTO Gatos(
                    raca, origem, cod_pais, 
-                   temperamento, peso, pagina_Wike
+                   temperamento, peso, pagina_Wiki
                    ) VALUES (?,?,?,?,?,?)
                 ''',(
                     raca, origem, cod_pais,
@@ -41,6 +41,32 @@ def criaBanco(raca, origem, cod_pais, temp, peso, pag):
     conexao.commit()
     conexao.close()
     
+def filters():
+    conexao = sqlite3.connect('projeto_rpa.db')
+    cursor = conexao.cursor()
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Gatos_Resumo(
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   raca TEXT,
+                   raca TEXT,
+                   origem TEXT,
+                   pagina_Wiki TEXT
+                )
+            ''')
+    
+    cursor.execute('''
+         SELECT raca, origem, pagina_wiki FROM Gatos
+''')
+    dados_filtrados = cursor.fetchall()
+
+    for linha in dados_filtrados:
+        cursor.execute('''
+            INSERT INTO Gatos_Resumo (raca, origem, pagina_Wiki)
+            VALUES (?, ?, ?)
+        ''', linha)
+        conexao.commit()
+        conexao.close
 
 def extraiDados(url_base):
     #url_base = requests.get(url_base)
