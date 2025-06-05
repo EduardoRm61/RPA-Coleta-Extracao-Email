@@ -29,6 +29,18 @@ def criaBanco(raca, origem, cod_pais, temp, peso, pag):
                 )
             ''')
     
+    cursor.execute('''
+        INSERT INTO Gatos(
+                   raca, origem, cod_pais, 
+                   temperamento, peso, pagina_Wike
+                   ) VALUES (?,?,?,?,?,?)
+                ''',(
+                    raca, origem, cod_pais,
+                    temp, peso, pag
+                ))
+    conexao.commit()
+    conexao.close()
+    
 
 def extraiDados(url_base):
     #url_base = requests.get(url_base)
