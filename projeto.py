@@ -14,7 +14,21 @@ email = 'eduardonunesdasilva23@gmail.com'
 url = 'https://api.thecatapi.com/v1/breeds'
 
 def criaBanco(raca, origem, cod_pais, temp, peso, pag):
-    pass
+    conexao = sqlite3.connect('projeto_rpa.db')
+    cursor = conexao.cursor()
+
+    cursor.execute('''
+        CREATE TABLE IF NOT EXISTS Gatos(
+                   id INTEGER PRIMARY KEY AUTOINCREMENT,
+                   raca TEXT,
+                   origem TEXT,
+                   cod_pais TEXT,
+                   temperamento TEXT,
+                   peso TEXT,
+                   pagina_Wiki TEXT
+                )
+            ''')
+    
 
 def extraiDados(url_base):
     #url_base = requests.get(url_base)
@@ -41,8 +55,6 @@ def extraiDados(url_base):
 
     except Exception as e:
         print({"Erro ao processar dados": str(e)})
-
-
 
 
 
