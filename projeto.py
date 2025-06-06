@@ -39,8 +39,6 @@ def filters():
                 )
             ''')
     
-    #cursor.execute('DELETE FROM Gatos_Resumo')
-    
     cursor.execute('''
          SELECT raca, origem, pagina_wiki FROM Gatos
 ''')
@@ -56,7 +54,6 @@ def filters():
     conexao.close()
 
 def extraiDados(url_base):
-    #url_base = requests.get(url_base)
     resposta = requests.get(url_base)
 
     if resposta.status_code!=200:
