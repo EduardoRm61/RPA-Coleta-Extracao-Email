@@ -13,7 +13,7 @@ email = 'eduardonunesdasilva23@gmail.com'
 
 url = 'https://api.thecatapi.com/v1/breeds'
 
-def criaBanco(raca, origem, cod_pais, temp, peso, pag,cursor):
+def guardaBanco(raca, origem, cod_pais, temp, peso, pag,cursor):
     cursor.execute('''
         INSERT INTO Gatos(
                    raca, origem, cod_pais, 
@@ -93,11 +93,10 @@ def extraiDados(url_base):
             peso = api.get('weight', {}).get('imperial', 'N/A')
             pag = api.get('wikipedia_url', 'Sem Link') 
 
-            criaBanco(raca, origem, cod_pais, temp, peso, pag, cursor)
+            guardaBanco(raca, origem, cod_pais, temp, peso, pag, cursor)
 
         conexao.commit()
         conexao.close()
-
         filters()
 
     except Exception as e:
@@ -133,6 +132,7 @@ def enviaEmail(email):
 
 
 extraiDados(url)
+enviaEmail(email)
 
 conexao = sqlite3.connect('projeto_rpa.db')
 cursor = conexao.cursor()
